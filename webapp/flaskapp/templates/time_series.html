@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript" src="{{ js }}"></script>
+<title>Comments Analytics</title>
+</head>
+<body>
+<h1>Comments By Day</h1>
+<div id="graphdiv3"
+  style="width:968px; height:400px;"></div>
+ <script type="text/javascript">
+	g = new Dygraph(
+			document.getElementById("graphdiv3"),
+			"{{ data_file }}",
+			{ 
+				pointClickCallback: function(e, point) {
+					alert("going to analyze " + point.yval + " posts from " + new Date(point.xval));
+			 	},
+				highlightCircleSize: 6,
+				axes : {
+				 x : {
+					axisLabelFormatter: function(d, gran) {
+						return Dygraph.dateAxisFormatter(new Date(d.getTime()) , Dygraph.MONTHLY);
+					},
+					pixelsPerLabel: 75
+				 }
+				}
+			}
+			);
+
+</script>
+</body>
+</html>
